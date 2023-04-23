@@ -21,7 +21,7 @@ public class Ticket
         Console.Clear();
         Console.WriteLine("\nМеню покупки билета\n");
         
-        Database.get_string();
+        Database.get_string_flight("flight_number");
         
         Console.Write("\nВведите номер интересующего Вас рейса: ");
         string numb = Console.ReadLine();
