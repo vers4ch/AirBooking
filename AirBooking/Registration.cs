@@ -1,3 +1,5 @@
+using Project_2.Airplane;
+
 namespace Project_2;
 
 public class Registration
@@ -13,6 +15,11 @@ public class Registration
         {
             Console.Clear();
             Database.get_book_string("booking", bk);
+            string flight = Database.get_string("booking", "book_num", bk, 2);
+            string typ = Database.get_string("flight_number", "num", flight, 4);
+            
+            Airplane.Airplane.type(typ);
+            
             Console.WriteLine("\nНажмите любую клавишу, чтобы выйти в главное меню");
             Console.ReadKey();
             Main.menu();
