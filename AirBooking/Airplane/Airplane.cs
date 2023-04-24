@@ -170,26 +170,40 @@ public class Airplane
                 { "J", "|", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"},
                 { "K", "|", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"},
             };
+
             
-            Random rnd = new Random();
-            int n = rnd.Next(150, 200);
-
-            for (int i = 0; i < n; i++)
+            
+            ///СИСТЕМА ГЕНЕРАЦИИ РАНДОМНЫХ ПАКСОВ
+            if (Database.get_string("flight_number", "num", flight_num, 5) != "")
             {
-                int fst = rnd.Next(1, 13);
-                int sec = rnd.Next(2, 35);
-                if (salon[fst, sec] != "0")
-                {
-                    salon[fst, sec] = "2";
-                }
-                else
-                {
-                    n++;
-                }
+                Console.WriteLine($"{flight_num} УЖЕ ЗАПОЛНЕН!");
+                
+                
+                
             }
-
-            //СОХРАНЕНИЕ ИСХОДНОГО СОСТОЯНИЯ
-            Database.update("flight_number", "num", flight_num, "red_places", ArrToString.ArrayToString(salon));
+            else
+            {
+                Random rnd = new Random();
+                int n = rnd.Next(80, 180);
+            
+                for (int i = 0; i < n; i++)
+                {
+                    int fst = rnd.Next(1, 13);
+                    int sec = rnd.Next(2, 35);
+                    if (salon[fst, sec] != "0")
+                    {
+                        salon[fst, sec] = "2";
+                    }
+                    else
+                    {
+                        n++;
+                    }
+                }
+                //СОХРАНЕНИЕ ИСХОДНОГО СОСТОЯНИЯ
+                Database.update("flight_number", "num", flight_num, "red_places", ArrToString.ArrayToString(salon));
+                Console.WriteLine("SAVE!");
+            }
+            
             
             
             

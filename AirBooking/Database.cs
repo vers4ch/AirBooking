@@ -191,6 +191,7 @@ namespace Project_2
             {
                 connection.Open();
                 SqliteCommand command = new SqliteCommand(sqlExpression, connection);
+                command.ExecuteNonQuery();
             }
         }
     }
