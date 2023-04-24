@@ -6,7 +6,9 @@ public class Inf_booking
     {
         Console.Clear();
         Console.Write("\nВведите номер брони: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         string? bk = Console.ReadLine();
+        Console.ResetColor();
         if (bk.Length == 6)
         {
             Console.Clear();

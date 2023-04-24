@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Подгони размер(command + '+') и нажми Enter");
+            Console.WriteLine("\n\nПодгони размер(command + '+') и нажми Enter                                                                                            =");
             Console.ReadKey();
             Console.Clear();
             Project_2.Main.menu();

@@ -21,13 +21,20 @@ public class Ticket
         Console.Clear();
         Console.WriteLine("\nМеню покупки билета\n");
         
-        Database.get_string_flight("flight_number");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("id\t\tNumber\t\tDepature\t\tArrival\t\t\tAirplane");
+        Console.ResetColor();
+        Database.get_table("flight_number");
         
         Console.Write("\nВведите номер интересующего Вас рейса: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         string numb = Console.ReadLine();
+        Console.ResetColor();
         
         Console.Write("\nСтоимость билета: 14 400₽\n\nВведите количество пассажиров: ");
+        Console.ForegroundColor = ConsoleColor.Green;
         int numb_pax = Convert.ToInt32(Console.ReadLine());
+        Console.ResetColor();
         if (numb_pax < 1)
         {
             Console.WriteLine("Минимум пассажиров: 1");
@@ -36,12 +43,16 @@ public class Ticket
         else if (numb_pax == 1)
         {
             Console.Write("\nВведите ФИО пассажира(Латиницей): ");
+            Console.ForegroundColor = ConsoleColor.Green;
             pax = Console.ReadLine();
+            Console.ResetColor();
         }
         else
         {
             Console.Write("\nВведите ФИО пассажиров (через запятую, латиницей): ");
+            Console.ForegroundColor = ConsoleColor.Green;
             pax = Console.ReadLine();
+            Console.ResetColor();
         }
         Console.Clear();
         string randomWord = GenerateNumberBook();
