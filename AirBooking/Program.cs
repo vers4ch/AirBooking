@@ -1,5 +1,7 @@
 ﻿namespace Project_2
 {
+    
+    //24.04.2023 914 line
     class Program
     {
         static void Main(string[] args)
@@ -11,5 +13,4 @@
         }
 
     }
-    
 }

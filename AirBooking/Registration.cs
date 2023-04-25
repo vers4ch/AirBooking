@@ -18,11 +18,7 @@ public class Registration
             string flight = Database.get_string("booking", "book_num", bk, 2);
             string typ = Database.get_string("flight_number", "num", flight, 4);
             string plane_size = Database.get_string("airplane", "plain_type", typ, 1);
-            Airplane.Airplane.salon(plane_size, flight);
-            
-            // Console.Write("Какое значение внести в бд?: ");
-            // string? newval = Console.ReadLine();
-            // Database.update("flight_number", "num", "AFL1707", "red_places", newval);
+            Airplane.Airplane.salon(plane_size, flight, bk);
             
             
             

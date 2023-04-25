@@ -2,6 +2,9 @@ namespace Project_2.Airplane;
 
 public class Airplane
 {
+    public static string[] Hletter = new string[13] {" ", "A", "B", "C", " ", "D", "E", "F", "G", " ", "H", "J", "K" };
+    
+    public static string[] Mletter = new string[8] { " ", "A", "B", "C", " ", "D", "E", "F"};
     public static void new_plane()
     {
         Console.Clear();
@@ -50,7 +53,7 @@ public class Airplane
         Console.Clear();
         Database.new_plane(type, size, quantity, places);
     }
-    public static void salon(string size, string flight_num)
+    public static void salon(string size, string flight_num, string book_num)
     {
         if (size == "MEGA")
         {
@@ -115,7 +118,7 @@ public class Airplane
                 { "F", "|", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"},
             };
             //СОХРАНЕНИЕ ИСХОДНОГО СОСТОЯНИЯ
-            Database.update("flight_number", "num", flight_num, "red_places", ArrToString.ArrayToString(salon));
+            Database.update("flight_number", "num", flight_num, "red_places", Tool.ArrayToString(salon));
             
             
             
@@ -173,19 +176,16 @@ public class Airplane
 
             
             
-            ///СИСТЕМА ГЕНЕРАЦИИ РАНДОМНЫХ ПАКСОВ
+            ///ПРОВЕРКА НА УЖЕ РАНДОМИЗИРОВАННЫХ РАХ
             if (Database.get_string("flight_number", "num", flight_num, 5) != "")
             {
-                Console.WriteLine($"{flight_num} УЖЕ ЗАПОЛНЕН!");
-                
-                
-                
+                string? arr = Database.get_string("flight_number", "num", flight_num, 5);
+                salon = Tool.StringToArray(arr);
             }
             else
             {
                 Random rnd = new Random();
                 int n = rnd.Next(80, 180);
-            
                 for (int i = 0; i < n; i++)
                 {
                     int fst = rnd.Next(1, 13);
@@ -199,16 +199,10 @@ public class Airplane
                         n++;
                     }
                 }
-                //СОХРАНЕНИЕ ИСХОДНОГО СОСТОЯНИЯ
-                Database.update("flight_number", "num", flight_num, "red_places", ArrToString.ArrayToString(salon));
+                //СОХРАНЕНИЕ NEW СОСТОЯНИЯ
+                Database.update("flight_number", "num", flight_num, "red_places", Tool.ArrayToString(salon));
                 Console.WriteLine("SAVE!");
             }
-            
-            
-            
-            
-            
-            
             
             
             for (int i = 0; i < salon.GetLength(0); i++)
@@ -231,6 +225,12 @@ public class Airplane
                         Console.Write(" □  ");
                         Console.ResetColor();
                     }
+                    else if (salon[i, j] == "3")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write(" ■  ");
+                        Console.ResetColor();
+                    }
                     else
                     {
                         Console.Write($" {salon[i, j]} ");
@@ -238,6 +238,74 @@ public class Airplane
 
                 }
 
+                Console.WriteLine();
+            }
+
+            if (Database.get_string("booking", "book_num", book_num, 6) == Database.get_string("booking", "book_num", book_num, 3))
+            {
+                string? sts = Database.get_string("booking", "book_num", book_num, 5);
+                salon = Tool.StringToArray(sts);
+            }
+            else
+            {
+                int pax = Convert.ToInt32(Database.get_string("booking", "book_num", book_num, 3));
+                int i = 0;
+                for (i = 0; i < pax; i++)
+                {
+                    Console.Write($"\nВыберите место для пассажира: {i+1}\n\nРяд(цифра): ");
+                    int row = Convert.ToInt32(Console.ReadLine());
+                    Console.Write("Место(буква): ");
+                    
+                    string keyy = Console.ReadLine();
+                    int wrd = 6;
+                    for (int j = 0; j < salon.GetLength(0); j++)
+                    {
+                        if (keyy == Hletter[j])
+                        {
+                            wrd = j;
+                            break;
+                        }
+                    }
+                    salon[wrd, row + 1] = "3";
+                }
+
+                Database.update("booking", "book_num", book_num, "place", Tool.ArrayToString(salon));
+                Database.update("booking", "book_num", book_num, "chk", Convert.ToString(i));
+            }
+            Console.Clear();
+            Console.Write(" ");
+
+            for (int i = 0; i < salon.GetLength(0); i++)
+            {
+                for (int j = 0; j < salon.GetLength(1); j++)
+                {
+                    if (salon[i, j] == "1")
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkBlue;
+                        Console.Write(" ■  ");
+                        Console.ResetColor();
+                    }
+                    else if (salon[i, j] == "0")
+                    {
+                        Console.Write("   ");
+                    }
+                    else if (salon[i, j] == "2")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(" □  ");
+                        Console.ResetColor();
+                    }
+                    else if (salon[i, j] == "3")
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write(" ■  ");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.Write($" {salon[i, j]} ");
+                    }
+                }
                 Console.WriteLine();
             }
         }

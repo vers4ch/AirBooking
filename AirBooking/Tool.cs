@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Project_2;
 
-public class ArrToString
+public class Tool
 {
     public static string ArrayToString(string[,] array)
     {
