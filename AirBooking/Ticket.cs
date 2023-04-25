@@ -7,11 +7,9 @@ public class Ticket
         Random random = new Random();
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         const string digits = "0123456789";
-        string randomWord = new string(Enumerable.Repeat(chars, 2)
-            .Select(s => s[random.Next(s.Length)]).ToArray());
+        string randomWord = new string(Enumerable.Repeat(chars, 2).Select(s => s[random.Next(s.Length)]).ToArray());
         randomWord += digits[random.Next(digits.Length)];
-        randomWord += new string(Enumerable.Repeat(chars, 3)
-            .Select(s => s[random.Next(s.Length)]).ToArray()).ToUpper();
+        randomWord += new string(Enumerable.Repeat(chars, 3).Select(s => s[random.Next(s.Length)]).ToArray()).ToUpper();
         return randomWord;
     }
     
@@ -24,7 +22,7 @@ public class Ticket
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("id\t\tNumber\t\tDepature\t\tArrival\t\t\tAirplane");
         Console.ResetColor();
-        Database.get_table("flight_number");
+        Database.get_table("flight_number", 5);
         
         Console.Write("\nВведите номер интересующего Вас рейса: ");
         Console.ForegroundColor = ConsoleColor.Green;

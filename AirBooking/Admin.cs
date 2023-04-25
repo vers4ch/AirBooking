@@ -19,7 +19,7 @@ public class Admin
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("id\t\tNumber\t\tDepature\t\tArrival\t\t\tAirplane");
                 Console.ResetColor();
-                Database.get_table("flight_number");
+                Database.get_table("flight_number", 5);
                 Console.Write("\nВведите номер нового рейса: ");
                 string? numb = Console.ReadLine();
                 Console.Write("\nВведите аэропорт вылета: ");
@@ -29,11 +29,7 @@ public class Admin
                 Console.Write("\nВведите тип ВС: ");
                 string? type = Console.ReadLine();
                 Console.Clear();
-                if (numb != null)
-                    if (dep != null)
-                        if (arr != null)
-                            if (type != null)
-                                Database.new_flight(numb, dep, arr, type);
+                Database.new_flight(numb, dep, arr, type);
 
                 Console.WriteLine("\nНажмите любую клавишу, чтобы вернуться в меню админа");
                 Console.ReadKey();
@@ -44,7 +40,7 @@ public class Admin
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("id\t\tNumber\t\tDepature\t\tArrival\t\t\tAirplane");
                 Console.ResetColor();
-                Database.get_table("flight_number");
+                Database.get_table("flight_number", 5);
                 Console.Write("\nВведите номер рейса, котрый требуется удалить(нажмите Enter, чтобы выйти): ");
                 string? num_flight = Console.ReadLine();
                 Database.delete_flight(num_flight);
@@ -57,14 +53,18 @@ public class Admin
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("id\t\tNumber\t\tDepature\t\tArrival\t\t\tAirplane");
                 Console.ResetColor();
-                Database.get_table("flight_number");
+                Database.get_table("flight_number", 5);
                 Console.WriteLine("\nНажмите любую клавишу, чтобы вернуться в меню админа");
                 Console.ReadKey();
                 menu();
                 break;
             case 4: //BOOKING
                 Console.Clear();
-                Database.get_BOOK("booking");
+                // Database.get_BOOK("booking");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("id\t\tNumber\t\tFlight\t\tNumb\t\tPAX");
+                Console.ResetColor();
+                Database.get_table("booking", 5);
                 Console.WriteLine("Выберите:\n1 - Создать новое бронирование\n2 - Удалить бронирование\n3 - Информация о бронировании\n4 - Выход в меню админа");
                 Console.ForegroundColor = ConsoleColor.Green;
                 int sc = Convert.ToInt32(Console.ReadLine());
@@ -116,9 +116,9 @@ public class Admin
                     case 1:
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("Type\t\tSize\t\tQuantity\tPlaces");
+                        Console.WriteLine("Type\t\tSize\t\tQuantity\tPlaces\t\tName");
                         Console.ResetColor();
-                        Database.get_table("airplane");
+                        Database.get_table("airplane", 5);
                         Console.WriteLine("\nНажмите любую клавишу, чтобы вернуться в меню админа");
                         Console.ReadKey();
                         menu();

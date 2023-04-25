@@ -16,7 +16,7 @@ namespace Project_2
                 command.CommandText = $"INSERT INTO flight_number (num, depature, arrival, airplane) VALUES ('{numb}', '{dep}', '{arr}', '{airpl}')";
                 int number = command.ExecuteNonQuery();
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"\nВ таблицу flight_number добавлен рейс: {numb}");
+                Console.WriteLine($"\nДобавлен новый рейс: {numb}");
                 Console.ResetColor();
             }
         }
@@ -36,8 +36,8 @@ namespace Project_2
             }
         }
 
-        //Get string TABLE
-        public static void get_table(string table)
+        //Get TABLE
+        public static void get_table(string table, int max_colomn)
         {
             string connectionString = "Data Source=database.sqlite3";
             using (SqliteConnection connection = new SqliteConnection(connectionString))
@@ -45,12 +45,9 @@ namespace Project_2
                 connection.Open();
                 SqliteCommand command = new SqliteCommand($"SELECT * FROM {table}", connection);
                 SqliteDataReader reader = command.ExecuteReader();
-                // Console.ForegroundColor = ConsoleColor.Yellow;
-                // Console.WriteLine("id\t\tNumber\t\tDepature\t\tArrival\t\t\tAirplane");
-                // Console.ResetColor();
                 while (reader.Read())
                 {
-                    for (int i = 0; i < reader.FieldCount; i++)
+                    for (int i = 0; i < max_colomn; i++)
                     {
                         Console.Write(reader[i] + "\t\t");
                     }
@@ -103,7 +100,15 @@ namespace Project_2
                 string airplane = get_string("flight_number", "num", flight, 4);
 
                 reader.Read();
-                info = $"Код бронирования:\t\t{reader[1]}\n" + $"Количество пассажиров:\t\t{reader[3]}\n" + $"Пассажиры:\t\t\t{reader[4]}\n" + $"Рейс:\t\t\t\t{reader[2]}\n" + $"Тип ВС:\t\t\t\t{airplane}\n" + $"Питание:\t\t\tпредоставляется\n" + $"Класс:\t\t\t\tЭконом\n" + $"Статус:\t\t\t\tподтвержден\n\n" + $"Стоимость заказа:\t\t{14400 * Convert.ToInt64(reader[3])}₽\n";
+                info = $"Код бронирования:\t\t{reader[1]}\n" + 
+                       $"Количество пассажиров:\t\t{reader[3]}\n" + 
+                       $"Пассажиры:\t\t\t{reader[4]}\n" + 
+                       $"Рейс:\t\t\t\t{reader[2]}\n" + 
+                       $"Тип ВС:\t\t\t\t{airplane}\n" + 
+                       $"Питание:\t\t\tпредоставляется\n" + 
+                       $"Класс:\t\t\t\tЭконом\n" + 
+                       $"Статус:\t\t\t\tподтвержден\n" + 
+                       $"Стоимость заказа:\t\t{14400 * Convert.ToInt64(reader[3])}₽\n";
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine(info);
                 Console.ResetColor();
@@ -155,7 +160,15 @@ namespace Project_2
                 string flight = get_string("booking", "book_num", number_booking, 2);
                 string airplane = get_string("flight_number", "num", flight, 4);
 
-                string info = $"\nКод бронирования:\t\t{number_booking}\n" + $"Количество пассажиров:\t\t{numb_of_pax}\n" + $"Пассажиры:\t\t\t{pax}\n" + $"Рейс:\t\t\t\t{number_flight}\n" + $"Тип ВС:\t\t\t\t{airplane}\n" + $"Питание:\t\t\tпредоставляется\n" + $"Класс:\t\t\t\tЭконом\n" + $"Статус:\t\t\t\tподтвержден\n\n" + $"Стоимость заказа:\t\t{14400 * numb_of_pax}₽\n";
+                string info = $"\nКод бронирования:\t\t{number_booking}\n" + 
+                              $"Количество пассажиров:\t\t{numb_of_pax}\n" + 
+                              $"Пассажиры:\t\t\t{pax}\n" + 
+                              $"Рейс:\t\t\t\t{number_flight}\n" + 
+                              $"Тип ВС:\t\t\t\t{airplane}\n" + 
+                              $"Питание:\t\t\tпредоставляется\n" + 
+                              $"Класс:\t\t\t\tЭконом\n" + 
+                              $"Статус:\t\t\t\tподтвержден\n\n" + 
+                              $"Стоимость заказа:\t\t{14400 * numb_of_pax}₽\n";
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine(info);
                 Console.ResetColor();
@@ -168,17 +181,21 @@ namespace Project_2
         }
 
         //Create NEW plane
-        public static void new_plane(string type, string size, string quatity, string places)
+        public static void new_plane(string type, string size, string quatity, string places, string nam)
         {
             using (var connection = new SqliteConnection("Data Source=database.sqlite3"))
             {
                 connection.Open();
                 SqliteCommand command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"INSERT INTO airplane (plain_type, plain_size, quantity, places) VALUES ('{type}', '{size}', '{quatity}', '{places}')";
+                command.CommandText = $"INSERT INTO airplane (plain_type, plain_size, quantity, places, nam) VALUES ('{type}', '{size}', '{quatity}', '{places}', '{nam}')";
                 int number = command.ExecuteNonQuery();
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"\nСоздан новый тип ВС: {type}\n" + $"\nРазмер: {size}" + $"\nКоличество: {quatity}" + $"\nПосадочных мест: {places}");
+                Console.WriteLine($"\nСоздан новый тип ВС: {type}\n" + 
+                                  $"\nНазвание: {nam}" + 
+                                  $"\nРазмер: {size}" + 
+                                  $"\nКоличество: {quatity}" + 
+                                  $"\nПосадочных мест: {places}");
                 Console.ResetColor();
             }
         }
