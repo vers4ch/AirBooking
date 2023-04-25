@@ -2,6 +2,7 @@
 {
     
     //24.04.2023 914 line
+    //24.04.2023 1147 line
     class Program
     {
         static void Main(string[] args)

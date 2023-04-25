@@ -211,10 +211,21 @@ public class Airplane
                 Database.update("booking", "book_num", book_num, "chk", Convert.ToString(i));
             }
             Console.Clear();
-            Console.Write(" ");
 
             print_salon(salon, book_num);
             
+            Console.WriteLine("\n");
+            
+            int width = 10;
+            for (int i = 0; i < salon.GetLength(1) - width; i++)
+            {
+                Console.Write("  ");
+            }
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write("Вы успешно зарегистрированы!");
+            Console.ResetColor();
+            Console.WriteLine();
         }
         else if (size == "M")
         {
@@ -293,9 +304,21 @@ public class Airplane
                 Database.update("booking", "book_num", book_num, "chk", Convert.ToString(i));
             }
             Console.Clear();
-            Console.Write(" ");
-            
+
             print_salon(salon, book_num);
+            
+            Console.WriteLine("\n");
+            
+            int width = 10;
+            for (int i = 0; i < salon.GetLength(1) - width; i++)
+            {
+                Console.Write("  ");
+            }
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write("Вы успешно зарегистрированы!");
+            Console.ResetColor();
+            Console.WriteLine();
         }
         
         else if (size == "H")
@@ -473,7 +496,21 @@ public class Airplane
                 Database.update("booking", "book_num", book_num, "chk", Convert.ToString(i));
             }
             Console.Clear();
+
             print_salon(salon, book_num);
+            
+            Console.WriteLine("\n");
+            
+            int width = 10;
+            for (int i = 0; i < salon.GetLength(1) - width; i++)
+            {
+                Console.Write("  ");
+            }
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write("Вы успешно зарегистрированы!");
+            Console.ResetColor();
+            Console.WriteLine();
         }
     }
 }
