@@ -12,23 +12,24 @@ public class Ticket
         randomWord += new string(Enumerable.Repeat(chars, 3).Select(s => s[random.Next(s.Length)]).ToArray()).ToUpper();
         return randomWord;
     }
-    
-    public static void creat()
+
+    public static void choice()
     {
-        string pax = "NULL";
         Console.Clear();
-        Console.WriteLine("\nМеню покупки билета\n");
-        
+        Console.WriteLine("\nМеню покупки билета");
+        string pax = "NULL";
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("id\t\tNumber\t\tDepature\t\tArrival\t\t\tAirplane");
         Console.ResetColor();
         Database.get_table("flight_number", 5);
-        
         Console.Write("\nВведите номер интересующего Вас рейса: ");
         Console.ForegroundColor = ConsoleColor.Green;
         string numb = Console.ReadLine();
         Console.ResetColor();
-        
+        if (numb == "/exit")
+        {
+            Main.menu();
+        }
         Console.Write("\nСтоимость билета: 14 400₽\n\nВведите количество пассажиров: ");
         Console.ForegroundColor = ConsoleColor.Green;
         int numb_pax = Convert.ToInt32(Console.ReadLine());
@@ -58,5 +59,21 @@ public class Ticket
         Console.WriteLine("Нажмите любую клавишу, чтобы выйти в главное меню.");
         Console.ReadKey();
         Main.menu();
+    }
+    
+    public static void creat()
+    {
+        Console.Clear();
+        Console.WriteLine("\nМеню покупки билета\n1 - Приступить к оформлению\n2 - Назад");
+        ConsoleKeyInfo moveKey = Console.ReadKey();
+        switch (moveKey.Key)
+        {
+            case ConsoleKey.D2:
+                Main.menu();
+                break;
+            default:
+                choice();
+                break;
+        }
     }
 }

@@ -278,6 +278,11 @@ public class Airplane
             }
             else
             {
+                //Для регистрация в мэин базу
+                string? main_salon = Database.get_string("flight_number", "num", flight_num, 5);
+                string[,] main_arr_salon = new string[8, 35];
+                main_arr_salon = Tool.StringToArray(main_salon);
+
                 int pax = Convert.ToInt32(Database.get_string("booking", "book_num", book_num, 3));
                 int i;
                 for (i = 0; i < pax; i++)
@@ -296,10 +301,12 @@ public class Airplane
                         }
                     }
                     salon[wrd, row + 1] = "3";
+                    main_arr_salon[wrd, row + 1] = "2";
                     Console.Clear();
                     print_salon(salon, book_num);
                 }
 
+                Database.update("flight_number", "num", flight_num, "red_places", Tool.ArrayToString(main_arr_salon)); // Сохранение в мэин базу свободных мест
                 Database.update("booking", "book_num", book_num, "place", Tool.ArrayToString(salon));
                 Database.update("booking", "book_num", book_num, "chk", Convert.ToString(i));
             }
@@ -374,8 +381,14 @@ public class Airplane
                 string? sts = Database.get_string("booking", "book_num", book_num, 5);
                 salon = Tool.StringToArray(sts);
             }
+            ////ENTERING PLACE
             else
             {
+                //Для регистрация в мэин базу
+                string? main_salon = Database.get_string("flight_number", "num", flight_num, 5);
+                string[,] main_arr_salon = new string[13, 35];
+                main_arr_salon = Tool.StringToArray(main_salon);
+                
                 int pax = Convert.ToInt32(Database.get_string("booking", "book_num", book_num, 3));
                 int i = 0;
                 for (i = 0; i < pax; i++)
@@ -395,10 +408,13 @@ public class Airplane
                         }
                     }
                     salon[wrd, row + 1] = "3";
+                    main_arr_salon[wrd, row + 1] = "2";
                     Console.Clear();
                     print_salon(salon, book_num);
                 }
 
+                // main_salon = Tool.ArrayToString(main_arr_salon);
+                Database.update("flight_number", "num", flight_num, "red_places", Tool.ArrayToString(main_arr_salon)); // Сохранение в мэин базу свободных мест
                 Database.update("booking", "book_num", book_num, "place", Tool.ArrayToString(salon));
                 Database.update("booking", "book_num", book_num, "chk", Convert.ToString(i));
             }
@@ -470,6 +486,11 @@ public class Airplane
             }
             else
             {
+                //Для регистрация в мэин базу
+                string? main_salon = Database.get_string("flight_number", "num", flight_num, 5);
+                string[,] main_arr_salon = new string[8, 35];
+                main_arr_salon = Tool.StringToArray(main_salon);
+
                 int pax = Convert.ToInt32(Database.get_string("booking", "book_num", book_num, 3));
                 int i;
                 for (i = 0; i < pax; i++)
@@ -488,10 +509,12 @@ public class Airplane
                         }
                     }
                     salon[wrd, row + 1] = "3";
+                    main_arr_salon[wrd, row + 1] = "2";
                     Console.Clear();
                     print_salon(salon, book_num);
                 }
 
+                Database.update("flight_number", "num", flight_num, "red_places", Tool.ArrayToString(main_arr_salon)); // Сохранение в мэин базу свободных мест
                 Database.update("booking", "book_num", book_num, "place", Tool.ArrayToString(salon));
                 Database.update("booking", "book_num", book_num, "chk", Convert.ToString(i));
             }

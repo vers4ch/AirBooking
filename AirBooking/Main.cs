@@ -17,27 +17,32 @@ public class Main
         Console.ForegroundColor = ConsoleColor.Red;
         Console.Write("4 - Админ панель\n");
         Console.ResetColor();
-        int fr = Convert.ToInt32(Console.ReadLine());
-        switch (fr)
+        // int fr = Convert.ToInt32(Console.ReadLine());
+        
+        ConsoleKeyInfo moveKey = Console.ReadKey();
+        switch (moveKey.Key)
         {
-            case 1:
-                Registration.choice();
+            case ConsoleKey.D1:
+                Registration.choice(); // exit
                 break;
-            case 2:
-                Ticket.creat();
+            case ConsoleKey.D2:
+                Ticket.creat(); // exit
                 break;
-            case 3:
-                Inf_booking.get();
+            case ConsoleKey.D3:
+                Inf_booking.get(); //
                 break;
-            case 4:
+            case ConsoleKey.D4:
                 Admin.choice();
                 break;
-            case 5:
-                Console.WriteLine("Введите номер рейса: ");
-                Console.ForegroundColor = ConsoleColor.Red;
-                string? flight = Console.ReadLine();
-                Console.ResetColor();
-                Database.get_string("flight_number", "num", flight, 4);
+            // case ConsoleKey.D5:
+            //     Console.WriteLine("Введите номер рейса: ");
+            //     Console.ForegroundColor = ConsoleColor.Red;
+            //     string? flight = Console.ReadLine();
+            //     Console.ResetColor();
+            //     Database.get_string("flight_number", "num", flight, 4);
+            //     break;
+            default:
+                menu();
                 break;
                 
         }

@@ -4,7 +4,7 @@ namespace Project_2;
 
 public class Registration
 {
-    public static void choice()
+    public static void cchoice()
     {
         Console.Clear();
         Console.Write("\nВведите номер брони: ");
@@ -23,6 +23,10 @@ public class Registration
             Console.ReadKey();
             Main.menu();
         }
+        else if(bk == "/exit")
+        {
+            Main.menu();
+        }
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -30,6 +34,22 @@ public class Registration
             Console.ResetColor();
             Console.ReadKey();
             choice();
+        }
+    }
+
+    public static void choice()
+    {
+        Console.Clear();
+        Console.WriteLine("\nСистема регистрации на рейс\n1 - Приступить к регистрации\n2 - Назад");
+        ConsoleKeyInfo moveKey = Console.ReadKey();
+        switch (moveKey.Key)
+        {
+            case ConsoleKey.D2:
+                Main.menu();
+                break;
+            default:
+                cchoice();
+                break;
         }
     }
 }
