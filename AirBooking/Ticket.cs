@@ -65,6 +65,7 @@ public class Ticket
     {
         Console.Clear();
         Console.WriteLine("\nМеню покупки билета\n1 - Приступить к оформлению\n2 - Назад");
+        
         ConsoleKeyInfo moveKey = Console.ReadKey();
         switch (moveKey.Key)
         {

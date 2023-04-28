@@ -34,13 +34,6 @@ public class Main
             case ConsoleKey.D4:
                 Admin.choice();
                 break;
-            // case ConsoleKey.D5:
-            //     Console.WriteLine("Введите номер рейса: ");
-            //     Console.ForegroundColor = ConsoleColor.Red;
-            //     string? flight = Console.ReadLine();
-            //     Console.ResetColor();
-            //     Database.get_string("flight_number", "num", flight, 4);
-            //     break;
             default:
                 menu();
                 break;

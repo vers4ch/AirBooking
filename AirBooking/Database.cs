@@ -59,32 +59,6 @@ namespace Project_2
             }
         }
 
-        //Get string BOOK
-        public static void get_BOOK(string table)
-        {
-            string connectionString = "Data Source=database.sqlite3";
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
-                SqliteCommand command = new SqliteCommand($"SELECT * FROM {table}", connection);
-                SqliteDataReader reader = command.ExecuteReader();
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("id\t\tNumber\t\tFlight\t\tNumb\t\tPAX");
-                Console.ResetColor();
-                while (reader.Read())
-                {
-                    for (int i = 0; i < reader.FieldCount; i++)
-                    {
-                        Console.Write(reader[i] + "\t\t");
-                    }
-
-                    Console.WriteLine();
-                }
-
-                reader.Close();
-            }
-        }
-
         //Get privat string BOOK
         public static void get_book_string(string table, string colomn)
         {

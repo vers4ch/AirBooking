@@ -23,6 +23,10 @@ public class Admin
                 Database.get_table("flight_number", 5);
                 Console.Write("\nВведите номер нового рейса: ");
                 string? numb = Console.ReadLine();
+                if (numb == "/exit")
+                {
+                    menu();
+                }
                 Console.Write("\nВведите аэропорт вылета: ");
                 string? dep = Console.ReadLine();
                 Console.Write("\nВведите аэропорт прибытия: ");
@@ -31,7 +35,6 @@ public class Admin
                 string? type = Console.ReadLine();
                 Console.Clear();
                 Database.new_flight(numb, dep, arr, type);
-
                 Console.WriteLine("\nНажмите любую клавишу, чтобы вернуться в меню админа");
                 Console.ReadKey();
                 menu();
@@ -44,6 +47,10 @@ public class Admin
                 Database.get_table("flight_number", 5);
                 Console.Write("\nВведите номер рейса, котрый требуется удалить(нажмите Enter, чтобы выйти): ");
                 string? num_flight = Console.ReadLine();
+                if (num_flight == "/exit")
+                {
+                    menu();
+                }
                 Database.delete_flight(num_flight);
                 Console.WriteLine("\nНажмите любую клавишу, чтобы вернуться в меню админа");
                 Console.ReadKey();
@@ -83,6 +90,10 @@ public class Admin
                         Console.Write("Введите номер брони, для удаления: ");
                         Console.ForegroundColor = ConsoleColor.Red;
                         string? book = Console.ReadLine();
+                        if (book == "/exit")
+                        {
+                            menu();
+                        }
                         Console.ResetColor();
                         Database.delete("booking", "book_num", book);
                         Console.Clear();
@@ -94,9 +105,13 @@ public class Admin
                         menu();
                         break;
                     case ConsoleKey.D3:
-                        Console.Write("Введите номер брони: ");
+                        Console.Write("\nВведите номер брони: ");
                         Console.ForegroundColor = ConsoleColor.Green;
                         string? bk = Console.ReadLine();
+                        if (bk == "/exit")
+                        {
+                            menu();
+                        }
                         Console.ResetColor();
                         Console.Clear();
                         Database.get_book_string("booking", bk);
@@ -112,12 +127,13 @@ public class Admin
             case ConsoleKey.D5: //AIRPLANE
                 Console.Clear();
                 Console.WriteLine("Выберите:\n1 - Список ВС\n2 - Добавить ВС\n3 - Выход в меню админа");
-                Console.ForegroundColor = ConsoleColor.Green;
-                int pl = Convert.ToInt32(Console.ReadLine());
-                Console.ResetColor();
-                switch (pl)
+                ConsoleKeyInfo pl = Console.ReadKey();
+                // Console.ForegroundColor = ConsoleColor.Green;
+                // int pl = Convert.ToInt32(Console.ReadLine());
+                // Console.ResetColor();
+                switch (pl.Key)
                 {
-                    case 1:
+                    case ConsoleKey.D1:
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("Type\t\tSize\t\tQuantity\tPlaces\t\tName");
@@ -127,13 +143,16 @@ public class Admin
                         Console.ReadKey();
                         menu();
                         break;
-                    case 2:
+                    case ConsoleKey.D2:
                         Airplane.Airplane.new_plane();
                         Console.WriteLine("\nНажмите любую клавишу, чтобы вернуться в меню админа");
                         Console.ReadKey();
                         menu();
                         break;
-                    case 3:
+                    case ConsoleKey.D3:
+                        menu();
+                        break;
+                    default:
                         menu();
                         break;
                 }
@@ -182,25 +201,32 @@ public class Admin
         {
             menu();
         }
+        else if (login == "/exit")
+        {
+            Main.menu();
+        }
         else
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Логин или пароль неверный!");
             Console.ResetColor();
             Console.WriteLine("\n\nВведите:\n1 - повторить попытку\n2 - выйти в главное меню");
-            Console.ForegroundColor = ConsoleColor.Green;
-            int gd = Convert.ToInt32(Console.ReadLine());
-            Console.ResetColor();
-            switch (gd)
+            ConsoleKeyInfo gd = Console.ReadKey();
+            // Console.ForegroundColor = ConsoleColor.Green;
+            // int gd = Convert.ToInt32(Console.ReadLine());
+            // Console.ResetColor();
+            switch (gd.Key)
             {
-                case 1:
+                case ConsoleKey.D1:
                     choice();
                     break;
-                case 2:
+                case ConsoleKey.D2:
                     Main.menu();
                     break;
                 default:
                     Console.WriteLine("Вы дурак?");
+                    Console.ReadKey();
+                    cchoice();
                     break;
             }
         }
