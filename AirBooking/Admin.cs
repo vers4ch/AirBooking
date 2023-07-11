@@ -73,7 +73,7 @@ public class Admin
                 Console.WriteLine("id\t\tNumber\t\tFlight\t\tNumb\t\tPAX");
                 Console.ResetColor();
                 Database.get_table("booking", 5);
-                Console.WriteLine("Выберите:\n1 - Создать новое бронирование\n2 - Удалить бронирование\n3 - Информация о бронировании\n4 - Выход в меню админа");
+                Console.WriteLine("\nВыберите:\n1 - Создать новое бронирование\n2 - Удалить бронирование\n3 - Информация о бронировании\n4 - Выход в меню админа");
                 // Console.ForegroundColor = ConsoleColor.Green;
                 // int sc = Convert.ToInt32(Console.ReadLine());
                 // Console.ResetColor();
@@ -113,8 +113,9 @@ public class Admin
                             menu();
                         }
                         Console.ResetColor();
-                        Console.Clear();
-                        Database.get_book_string("booking", bk);
+                        // Console.Clear();
+                        // Database.get_book_string("booking", bk);
+                        Inf_booking.adminget(bk);
                         break;
                     case ConsoleKey.D4:
                         menu();
